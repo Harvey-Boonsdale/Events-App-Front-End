@@ -2,18 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import EventCard from "./EventCard";
+import InputForm from "./InputForm";
 
-// define properties of event card
+// initialise properties of event card
 
 function App() {
-  const [event, changeEvent] = useState({
-    name: "",
-    location: "",
-    info: "",
-    date: "",
-    time: "",
-    id: "",
-  });
+  const [events, changeEvents] = useState([]);
 
   // error message
 
@@ -25,9 +19,7 @@ function App() {
     }
   };
 
-  // get data from server and populate event card
-
-  async function fetchData() {
+  const listEvents = async () => {
     let res = await axios.get("http://localhost:3001/events/");
 
     let success = checkStatus(res);
@@ -35,32 +27,32 @@ function App() {
       alert("Error connecting - please try again");
       return;
     }
+    console.log(res.data);
+    changeEvents(res.data);
+  };
 
-    changeEvent({
-      name: res.data[0].name,
-      location: res.data[0].location,
-      info: res.data[0].info,
-      date: res.data[0].date,
-      time: res.data[0].time,
-      id: res.data[0]._id,
-    });
-  }
+  // runs when page renders for the first time
 
   useEffect(() => {
-    fetchData();
+    listEvents();
   }, []);
+
+  const makeEvents = () => {
+    return events.map((event) => {
+      console.log(event);
+      return <EventCard postToDisplay={event} />;
+    });
+  };
 
   //print event card
 
   return (
     <div>
       <div>
-        <h2>Event Name: {event.name}</h2>
-        <p>Location: {event.location}</p>
-        <p>Info: {event.info}</p>
-        <p>Date: {event.date}</p>
-        <p>Time: {event.time}</p>
+        <InputForm />
       </div>
+      <h1>Your Events</h1>
+      <div>{makeEvents()}</div>
     </div>
   );
 }
