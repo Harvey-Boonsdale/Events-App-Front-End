@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
 function EventCard(props) {
   return (
     <div>
-      <h2>Event Name: {props.name}</h2>
-      <p>Location: {props.location}</p>
-      <p>Info: {props.info}</p>
-      <p>Date: {props.date}</p>
-      <p>Time: {props.time}</p>
+      <h2>Event Name: {props.postToDisplay.name}</h2>
+      <p>Location: {props.postToDisplay.location}</p>
+      <p>Info: {props.postToDisplay.info}</p>
+      <p>Date: {props.postToDisplay.date}</p>
+      <p>Time: {props.postToDisplay.time}</p>
     </div>
   );
 }
