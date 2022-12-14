@@ -3,11 +3,13 @@ import axios from "axios";
 import "./App.css";
 import EventCard from "./EventCard";
 import InputForm from "./InputForm";
+import { ApiClient } from "./apiClient";
 
 // initialise properties of event card
 
 function App() {
   const [events, changeEvents] = useState([]);
+  const client = new ApiClient();
 
   // error message
 
@@ -27,7 +29,7 @@ function App() {
       alert("Error connecting - please try again");
       return;
     }
-    console.log(res.data);
+
     changeEvents(res.data);
   };
 
@@ -39,7 +41,6 @@ function App() {
 
   const makeEvents = () => {
     return events.map((event) => {
-      console.log(event);
       return <EventCard postToDisplay={event} />;
     });
   };
@@ -49,7 +50,7 @@ function App() {
   return (
     <div>
       <div>
-        <InputForm />
+        <InputForm client={client} />
       </div>
       <h1>Your Events</h1>
       <div>{makeEvents()}</div>

@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 
 function InputForm(props) {
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(e.target.name.value);
+
+    let res = await props.client.addEvent(
+      e.target.name.value,
+      e.target.location.value,
+      e.target.info.value,
+      e.target.date.value,
+      e.target.time.value
+    );
+    console.log(res);
   };
   return (
     <div>
