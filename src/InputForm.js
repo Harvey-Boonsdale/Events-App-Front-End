@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function InputForm(props) {
   const submitHandler = async (e) => {
@@ -11,12 +13,13 @@ function InputForm(props) {
       e.target.date.value,
       e.target.time.value
     );
+    props.listEvents();
     console.log(res);
   };
   return (
     <div>
       <h1>Add new Event</h1>
-      <form onSubmit={(e) => submitHandler(e)} id="addForm">
+      <Form onSubmit={(e) => submitHandler(e)} id="addForm">
         Event Name:
         <br />
         <input type="text" name="name" />
@@ -38,11 +41,11 @@ function InputForm(props) {
         <input type="time" name="time" />
         <br />
         <br />
-        <button type="submit" disabled={false}>
+        <Button type="submit" disabled={false}>
           {" "}
           Submit{" "}
-        </button>
-      </form>
+        </Button>
+      </Form>
     </div>
   );
 }
