@@ -1,5 +1,6 @@
 import axios from "axios";
-const url = "https://events-app-api.onrender.com";
+// const url = "https://events-app-api.onrender.com";
+const url = "http://localhost:3001/";
 
 export class ApiClient {
   authenticatedCall(method, url, data) {
