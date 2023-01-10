@@ -1,3 +1,9 @@
 .navBarLink {
   margin: 5px;
 }
+
+.eventCard {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
