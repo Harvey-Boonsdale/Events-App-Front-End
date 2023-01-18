@@ -1,24 +1,31 @@
-// import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import "./App.css";
+import { Link } from "react-router-dom";
 
 function EventCard(props) {
+  //function to delete on click
+
+  const deleteHandler = async (e) => {
+    props.client.deleteEvent(props.postToDisplay._id);
+    props.listEvents();
+  };
+
   return (
     <div className="eventCard">
       <Card bg="light" style={{ width: "18rem" }}>
         <Card.Body>
           <Card.Title>{props.postToDisplay.name}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
-            Location: {props.postToDisplay.location}{" "}
-          </Card.Subtitle>
-          <Card.Text>Date: {props.postToDisplay.info}</Card.Text>
+          <Card.Text>Location: {props.postToDisplay.location} </Card.Text>
+          <Card.Text>Date: {props.postToDisplay.date}</Card.Text>
           <Card.Text>Time: {props.postToDisplay.time}</Card.Text>
           <Card.Text>{props.postToDisplay.info}</Card.Text>
-          <Card.Link href="#">Edit Event</Card.Link>
-          <Card.Link href="#">Delete Event</Card.Link>
+          <Link className="link" to={`/edit/${props.postToDisplay._id}`}>
+            Edit Event
+          </Link>
+          <Button variant="danger" onClick={() => deleteHandler()}>
+            Delete Event
+          </Button>
         </Card.Body>
       </Card>
     </div>

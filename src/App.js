@@ -7,6 +7,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import EventCard from "./EventCard";
 import InputForm from "./InputForm";
+import EditForm from "./EditForm";
 import MyNav from "./Navbar";
 import { ApiClient } from "./apiClient";
 
@@ -25,6 +26,8 @@ function App() {
       return false;
     }
   };
+
+  // Gets info from server and puts it in state
 
   const listEvents = async () => {
     let res = await axios.get("http://localhost:3001/events/");
@@ -46,7 +49,13 @@ function App() {
 
   const makeEvents = () => {
     return events.map((event) => {
-      return <EventCard postToDisplay={event} />;
+      return (
+        <EventCard
+          postToDisplay={event}
+          client={client}
+          listEvents={listEvents}
+        />
+      );
     });
   };
 
@@ -68,6 +77,12 @@ function App() {
         <Route
           path="/add"
           element={<InputForm client={client} listEvents={listEvents} />}
+        />
+        <Route
+          path="/edit/:id"
+          element={
+            <EditForm events={events} client={client} listEvents={listEvents} />
+          }
         />
       </Routes>
     </Container>

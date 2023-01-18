@@ -9,16 +9,16 @@ function MyNav() {
       <br />
       <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand Link to="view">
-            <Link className="navBarLink" to="view">
+          <Navbar.Brand to="view">
+            <Link className="link" to="view">
               My Events App
             </Link>
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Link className="navBarLink" to="view">
+            <Link className="link" to="view">
               View Events
             </Link>
-            <Link className="navBarLink" to="add">
+            <Link className="link" to="add">
               Add Events
             </Link>
           </Nav>
