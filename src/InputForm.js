@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 function InputForm(props) {
+  const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    let res = await props.client.addEvent(
+    props.client.addEvent(
       e.target.name.value,
       e.target.location.value,
       e.target.info.value,
@@ -14,7 +16,7 @@ function InputForm(props) {
       e.target.time.value
     );
     props.listEvents();
-    console.log(res);
+    navigate("/view");
   };
   return (
     <div>

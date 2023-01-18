@@ -30,4 +30,20 @@ export class ApiClient {
       time,
     });
   }
+
+  // Function to edit event
+
+  editEvent(post, id) {
+    // Using Insomnia, send edit request to back end
+    // Recreate request using Axios and send from this function
+    // Inside that request, needs to be new post data
+    // Send post inside Axios request
+    return this.authenticatedCall("put", url + `events/${id}`, post);
+  }
+
+  // Function to delete event
+
+  deleteEvent(id) {
+    return this.authenticatedCall("delete", url + `events/${id}`);
+  }
 }
