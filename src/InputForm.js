@@ -16,7 +16,7 @@ function InputForm(props) {
       e.target.time.value
     );
     props.listEvents();
-    navigate("/view");
+    navigate("/");
   };
   return (
     <div>

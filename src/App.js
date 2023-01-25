@@ -9,8 +9,8 @@ import EventCard from "./EventCard";
 import InputForm from "./InputForm";
 import EditForm from "./EditForm";
 import MyNav from "./Navbar";
-// import Login from "./Login";
-// import Dashboard from "./Dashboard";
+import Login from "./Login";
+import Dashboard from "./Dashboard";
 import { ApiClient } from "./apiClient";
 
 // initialise properties of event card
@@ -54,37 +54,23 @@ function App() {
     changeEvents(res.data);
   };
 
-  // runs when page renders for the first time
-
-  useEffect(() => {
-    listEvents();
-  }, []);
-
-  const makeEvents = () => {
-    return events.map((event) => {
-      return (
-        <EventCard
-          postToDisplay={event}
-          client={client}
-          listEvents={listEvents}
-        />
-      );
-    });
-  };
-
-  //print event card
-
   return (
     <Container>
       <MyNav />
       <Routes>
         <Route
-          path="/view"
+          path="/"
           index
           element={
-            <Container>
-              <Row>{makeEvents()}</Row>
-            </Container>
+            token ? (
+              <Dashboard
+                listEvents={listEvents}
+                events={events}
+                client={client}
+              />
+            ) : (
+              <Login />
+            )
           }
         />
         <Route
@@ -101,6 +87,5 @@ function App() {
     </Container>
   );
 }
-// return <>{token ? <Dashboard /> : <Login />}</>;
 
 export default App;
