@@ -39,7 +39,7 @@ function EditForm(props) {
 
     props.client.editEvent(formValues, id);
     props.listEvents();
-    navigate("/view");
+    navigate("/");
   };
 
   return (
