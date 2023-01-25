@@ -9,13 +9,24 @@ import EventCard from "./EventCard";
 import InputForm from "./InputForm";
 import EditForm from "./EditForm";
 import MyNav from "./Navbar";
+// import Login from "./Login";
+// import Dashboard from "./Dashboard";
 import { ApiClient } from "./apiClient";
 
 // initialise properties of event card
 
 function App() {
+  const [token, changeToken] = useState("secretString");
   const [events, changeEvents] = useState([]);
-  const client = new ApiClient();
+  const logoutHandler = () => {
+    console.log("logging out");
+  };
+  const client = new ApiClient(
+    () => {
+      return token;
+    },
+    () => logoutHandler()
+  );
 
   // error message
 
@@ -30,7 +41,9 @@ function App() {
   // Gets info from server and puts it in state
 
   const listEvents = async () => {
-    let res = await axios.get("http://localhost:3001/events/");
+    let res = await axios.get("http://localhost:3001/events/", {
+      headers: { authorization: "secretString" },
+    });
 
     let success = checkStatus(res);
     if (!success) {
@@ -88,5 +101,6 @@ function App() {
     </Container>
   );
 }
+// return <>{token ? <Dashboard /> : <Login />}</>;
 
 export default App;
