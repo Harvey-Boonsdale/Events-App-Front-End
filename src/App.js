@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import EventCard from "./EventCard";
 import InputForm from "./InputForm";
 import EditForm from "./EditForm";
 import MyNav from "./Navbar";
@@ -40,18 +38,16 @@ function App() {
 
   // Gets info from server and puts it in state
 
-  const listEvents = async () => {
-    let res = await axios.get("http://localhost:3001/events/", {
-      headers: { authorization: "secretString" },
-    });
+  const listEvents = () => {
+    client.listEvents().then((response) => changeEvents(response.data));
 
-    let success = checkStatus(res);
-    if (!success) {
-      alert("Error connecting - please try again");
-      return;
-    }
+    // let success = checkStatus(response);
+    // if (!success) {
+    //   alert("Error connecting - please try again");
+    //   return;
+    // }
 
-    changeEvents(res.data);
+    // changeEvents(res.data);
   };
 
   return (
