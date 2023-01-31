@@ -25,11 +25,11 @@ export class ApiClient {
     });
   }
 
-  // listEvents() {
-  //   return this.authenticatedCall("get", url + "events", {
-  //     headers: { authorization: "secretString" },
-  //   });
-  // }
+  listEvents() {
+    return this.authenticatedCall("get", url + "events", {
+      headers: { authorization: "secretString" },
+    });
+  }
 
   addEvent(name, location, info, date, time) {
     return this.authenticatedCall("post", url + "events", {
