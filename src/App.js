@@ -39,15 +39,14 @@ function App() {
   // Gets info from server and puts it in state
 
   const listEvents = () => {
-    client.listEvents().then((response) => changeEvents(response.data));
-
-    // let success = checkStatus(response);
-    // if (!success) {
-    //   alert("Error connecting - please try again");
-    //   return;
-    // }
-
-    // changeEvents(res.data);
+    client.listEvents().then((response) => {
+      let success = checkStatus(response);
+      if (!success) {
+        alert("Error connecting - please try again");
+        return;
+      }
+      changeEvents(response.data);
+    });
   };
 
   return (
