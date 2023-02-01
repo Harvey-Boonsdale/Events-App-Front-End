@@ -3,20 +3,32 @@ import React, { useState } from "react";
 function Login(props) {
   const [disabled, changeDisabled] = useState(false);
 
-  const submitHandler = (e) => {
-    console.log("submit");
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    changeDisabled(true);
+    try {
+      const res = await props.client.login(
+        e.target.username.value,
+        e.target.password.value
+      );
+      props.loginHandler(res.data.token);
+    } catch (error) {
+      alert("Incorrect login: please try again");
+    }
+    changeDisabled(false);
   };
 
   return (
     <>
-      Login
       <br />
-      <form onSubmit={(e) => this.submitHandler(e)}>
-        username
+      <h1>Login</h1>
+      <br />
+      <form onSubmit={(e) => submitHandler(e)}>
+        Username
         <br />
         <input type="text" name="username" disabled={disabled} />
         <br />
-        password
+        Password
         <br />
         <input type="password" name="password" disabled={disabled} />
         <br />

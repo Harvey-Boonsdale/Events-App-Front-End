@@ -7,12 +7,21 @@ export class ApiClient {
     this.tokenProvider = tokenProvider;
     this.logoutHandler = logoutHandler;
   }
+
+  async login(username, password) {
+    return await axios({
+      method: "post",
+      url: `${url}auth`,
+      data: { username, password },
+    });
+  }
+
   authenticatedCall(method, url, data) {
     return axios({
       method,
       url,
       headers: {
-        authorization: "secretString",
+        authorization: this.tokenProvider(),
       },
       data,
     }).catch((error) => {
