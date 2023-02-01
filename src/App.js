@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 import "./App.css";
@@ -14,10 +13,15 @@ import { ApiClient } from "./apiClient";
 // initialise properties of event card
 
 function App() {
-  const [token, changeToken] = useState("secretString");
+  const [token, changeToken] = useState(window.localStorage.getItem("token"));
   const [events, changeEvents] = useState([]);
   const logoutHandler = () => {
-    console.log("logging out");
+    window.localStorage.removeItem("token");
+    changeToken(undefined);
+  };
+  const loginHandler = (token) => {
+    window.localStorage.setItem("token", token);
+    changeToken(token);
   };
   const client = new ApiClient(
     () => {
@@ -64,7 +68,12 @@ function App() {
                 client={client}
               />
             ) : (
-              <Login />
+              <Login
+                loginHandler={(token) => {
+                  loginHandler(token);
+                }}
+                client={client}
+              />
             )
           }
         />

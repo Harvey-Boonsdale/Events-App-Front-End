@@ -20,10 +20,17 @@ function EventCard(props) {
           <Card.Text>Date: {props.postToDisplay.date}</Card.Text>
           <Card.Text>Time: {props.postToDisplay.time}</Card.Text>
           <Card.Text>{props.postToDisplay.info}</Card.Text>
-          <Link className="link" to={`/edit/${props.postToDisplay._id}`}>
+          <Link
+            className="link btn btn-primary"
+            to={`/edit/${props.postToDisplay._id}`}
+          >
             Edit Event
           </Link>
-          <Button variant="danger" onClick={() => deleteHandler()}>
+          <Button
+            className="link"
+            variant="danger"
+            onClick={() => deleteHandler()}
+          >
             Delete Event
           </Button>
         </Card.Body>
